@@ -7,38 +7,40 @@
     <title>Calculator</title>
   </head>
   <body>
-      <div class="calculator">
-          <input type="text" id="screen" class="calculator-screen" value="0" disabled />
-
-          <div id=keys class="calculator-keys">
-              <button type="button" class="operator" id="+"> + </button>
-              <button type="button" class="operator" id="-"> - </button>
-              <button type="button" class="operator" id="*"> * </button>
-              <button type="button" class="operator" id="/"> / </button>
-              <br>
-
-              <button type="button" class="number" id="7">7</button>
-              <button type="button" class="number" id="8">8</button>
-              <button type="button" class="number" id="9">9</button>
-              <br>
-
-              <button type="button" class="number" id="4">4</button>
-              <button type="button" class="number" id="5">5</button>
-              <button type="button" class="number" id="6">6</button>
-              <br>
-
-              <button type="button" class="number" id="1">1</button>
-              <button type="button" class="number" id="2">2</button>
-              <button type="button" class="number" id="3">3</button>
-              <br>
-
-              <button type="button" class="number" id="0">0</button>
-              <button type="button" class="decimal function" id=".">.</button>
-              <button type="button" class="all-clear function" id="all-clear"> AC </button>
-              <br>
-
-              <button type="button" class="equal-sign operator" id="=">=</button>
-           </div>
+    <div id="container">
+      <form>
+        <input type="text" disabled>
+      </form>
+      <table>
+        <tr>
+          
+          <td><button value=" / " class="operator">/</button></td>
+          <td><button value="*" class="operator">*</button></td>
+          <td><button value="-" class="operator">-</button></td>
+          <td ><button value="+" id="add" class="operator">+</button></td><td><button id="clear">AC</button></td>
+        </tr>
+        <tr>
+          <td><button value="7" class="number">7</button></td>
+          <td><button value="8" class="number">8</button></td>
+          <td><button value="9" class="number">9</button></td>
+          
+        </tr>
+        <tr>
+          <td><button value="4" class="number">4</button></td>
+          <td><button value="5" class="number">5</button></td>
+          <td><button value="6" class="number">6</button></td>
+        </tr>
+        <tr>
+          <td><button value="1" class="number">1</button></td>
+          <td><button value="2" class="number">2</button></td>
+          <td><button value="3" class="number">3</button></td>
+        </tr>
+        <tr>
+          <td><button value="0" id="zero" class="number">0</button></td>
+          <td><button value="." id="dot" class="operator">.</button></td>
+          <td><button value="=" id="equal">=</button></td>
+        </tr>
+      </table>
     </div>
 
 

@@ -2,8 +2,6 @@ function add(x, y){
     return (x + y);
 } 
 
-console.log(add(4,6))
-
 function subtract(x, y){
     return x - y;
 }
@@ -18,19 +16,22 @@ function divide(x, y){
 }
 
 
-function operate(operator, x, y){ 
+function operate(x, y, operator){ 
     switch(operator){
         case "+":
-            add(x, y);
+            return add(x, y);
             break;
         case "-":
-            subtract(x, y);
+            return subtract(x, y);
             break;
         case "*":
-            multiply(x, y);
+            return multiply(x, y);
             break;
         case "/":
-            divide(x, y);
+            return divide(x, y);
+            break;
+        default:
+            return null;
     }
 }
 
@@ -44,8 +45,8 @@ let isFirst = true;
 
 numBTN = document.querySelectorAll(".number");
 opBTN = document.querySelectorAll(".operator");
-acBTN = document.querySelectorAll(".all-clear");
-eqBTN = document.querySelectorAll("equal");
+acBTN = document.querySelector("#clear");
+eqBTN = document.querySelector("#equal");
 
 numBTN.forEach(btn =>{
     btn.addEventListener("click", insert);
@@ -97,3 +98,36 @@ function operation(){
     }
 }
 
+acBTN.addEventListener("click", clear);
+eqBTN.addEventListener("click", equal);
+
+function clear(){
+    displayVal = 0;
+    firstVal = 0;
+    secondVal = 0;
+    op = "";
+    newOp = "";
+    firstCalc = false;
+    isFirst = true;
+    document.querySelector("input").value = displayVal;
+    numBTN.forEach(btn =>{
+        btn.disabled = false;
+    });
+    opBTN.forEach(btn =>{
+        btn.disabled = false;
+    });
+}
+
+function equal(){
+    if(!isFirst){
+        document.querySelector("input").value = operate(parseFloat(firstVal), parseFloat(secondVal), op)
+    }else if(isFirst){
+        document.querySelector("input").value = operate(parseFloat(firstVal), parseFloat(secondVal), newOp);
+    }
+    numBTN.forEach(btn =>{
+        btn.disabled = true;
+    });
+    opBTN.forEach(btn=>{
+        btn.disabled = true;
+    });
+}
