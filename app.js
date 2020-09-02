@@ -1,8 +1,8 @@
-let total=0;
-
 function add(x, y){
-    return Math.round(x + y);
-}
+    return (x + y);
+} 
+
+console.log(add(4,6))
 
 function subtract(x, y){
     return x - y;
@@ -18,107 +18,82 @@ function divide(x, y){
 }
 
 
-function operate(operator, x, y){
-    let answer;
-    
+function operate(operator, x, y){ 
     switch(operator){
         case "+":
-            answer = add(x, y);
+            add(x, y);
             break;
         case "-":
-            answer = subtract(x, y);
+            subtract(x, y);
             break;
         case "*":
-            answer = multiply(x, y);
+            multiply(x, y);
             break;
         case "/":
-            answer = divide(x, y);
+            divide(x, y);
     }
 }
 
-document.getElementById("+").addEventListener("click", function(){
-    curr=document.getElementById("screen").value;
-    total = add(total, curr);
-    document.getElementById("screen").value = total;
+let displayVal = 0;
+let op;
+let newOp;
+let firstVal;
+let secondVal;
+let firstCalc = false;
+let isFirst = true;
+
+numBTN = document.querySelectorAll(".number");
+opBTN = document.querySelectorAll(".operator");
+acBTN = document.querySelectorAll(".all-clear");
+eqBTN = document.querySelectorAll("equal");
+
+numBTN.forEach(btn =>{
+    btn.addEventListener("click", insert);
 });
-document.getElementById("-").addEventListener("click", function(){
-    document.getElementById("screen").value += "-";
+
+
+function insert(){
+    if(displayVal == 0){
+        document.querySelector("input").value = this.value;
+        displayVal = this.value;
+        secondVal = displayVal;
+    }else{
+        document.querySelector("input").value = document.querySelector("input").value + this.value;
+        displayVal = document.querySelector("input").value;
+        secondVal = displayVal;
+    }
+}
+
+function display(){
+    document.querySelector("input").value = displayVal;
+}
+
+display();
+
+opBTN.forEach(btn =>{
+    btn.addEventListener("click", operation);
 });
-document.getElementById("*").addEventListener("click", function(){
-    document.getElementById("screen").value += "*";
-});
-document.getElementById("/").addEventListener("click", function(){
-    document.getElementById("screen").value += "/";
-});
-document.getElementById("9").addEventListener("click", function(){
-    if(document.getElementById("screen").value == 0){
-        document.getElementById("screen").value = 9
-    }else
-    document.getElementById("screen").value += 9;
-});
-document.getElementById("8").addEventListener("click", function(){
-    if(document.getElementById("screen").value == 0){
-        document.getElementById("screen").value = 8
-    }else
-    document.getElementById("screen").value += 8;
-});
-document.getElementById("7").addEventListener("click", function(){
-    if(document.getElementById("screen").value == 0){
-        document.getElementById("screen").value = 7
-    }else
-    document.getElementById("screen").value += 7;
-});
-document.getElementById("6").addEventListener("click", function(){
-    if(document.getElementById("screen").value == 0){
-        document.getElementById("screen").value = 6
-    }else
-    document.getElementById("screen").value += 6;
-});
-document.getElementById("5").addEventListener("click", function(){
-    if(document.getElementById("screen").value == 0){
-        document.getElementById("screen").value = 5
-    }else
-    document.getElementById("screen").value += 5;
-});
-document.getElementById("4").addEventListener("click", function(){
-    if(document.getElementById("screen").value == 0){
-        document.getElementById("screen").value = 4
-    }else
-    document.getElementById("screen").value += 4;
-});
-document.getElementById("3").addEventListener("click", function(){
-    if(document.getElementById("screen").value == 0){
-        document.getElementById("screen").value = 3
-    }else
-    document.getElementById("screen").value += 3;
-});
-document.getElementById("2").addEventListener("click", function(){
-    if(document.getElementById("screen").value == 0){
-        document.getElementById("screen").value = 2
-    }else
-    document.getElementById("screen").value += 2;
-});
-document.getElementById("1").addEventListener("click", function(){
-    if(document.getElementById("screen").value == 0){
-        document.getElementById("screen").value = 1
-    }else
-    document.getElementById("screen").value += 1;
-});
-document.getElementById("0").addEventListener("click", function(){
-    if(document.getElementById("screen").value == 0){
-        document.getElementById("screen").value = 0
-    }else
-    document.getElementById("screen").value += 0;
-});
-/*
-document.getElementById(".").addEventListener("click", function(){
-    document.getElementById("screen").value += ".";
-});
-*/
-document.getElementById("all-clear").addEventListener("click", function(){
-    document.getElementById("screen").value = '0';
-    console.log(document.getElementById("screen").value)
-});
-document.getElementById("=").addEventListener("click", function(){
-    console.log(document.getElementById("screen").value)
-});
+
+function operation(){
+    if (isFirst){
+        if(!firstCalc){
+            firstVal = displayVal;
+        }
+        op = this.value;
+        isFirst = false;
+        if(firstCalc){
+            secondVal = displayVal;
+            firstVal = operate(parseFloat(firstVal), parseFloat(secondVal), newOp);
+            document.querySelector("input").value = first_value;
+        }
+        displayVal = 0;
+    }else if(!isFirst){
+        displayVal = 0;
+        newOp = this.value;
+        firstVal = operate(parseFloat(firstVal), parseFloat(secondVal), op);
+        document.querySelector("input").value = firstVal;
+        isFirst = true;
+        firstCalc = true;
+    }
+}
+
