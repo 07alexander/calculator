@@ -45,6 +45,7 @@ function operate(a, b, op){
     }
 }
 function clearDisplay(){
+    display.value="";
     display.value="0";
 }
 var operatorPressedOnce = false;
@@ -53,18 +54,16 @@ calculator.addEventListener("click", function(e){
     var numb = 0;
     const isOP = e.target.classList.contains('op');
     const isCLS = e.target.classList.contains('cls');
-
-    if(!isCLS){
+    const isKeys = e.target.classList.contains('keys');
     if(display.value === "0"){display.value="";} //Clear 0 on first input
-
     
-    display.value +=  e.target.innerHTML; //Updates display values
-
-    }else{
+    if(isKeys){ 
+        if(!isOP){
+        display.value +=  e.target.textContent; //Updates display values
+        console.log(display.value);
+        }
+    }
+    if(isCLS){
         clearDisplay();
     }
-
-    console.log(e.target.innerHTML);
-    console.log(isOP);
-
 })

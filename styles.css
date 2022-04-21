@@ -26,8 +26,8 @@
 .calculator input{
     height: 100px;
     width: 100%;
-    direction: rtl;
-    font-size: 100px;
+    text-align: right;
+    font-size: 80px;
 }
 
 .weird-keys{
