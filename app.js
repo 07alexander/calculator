@@ -1,3 +1,9 @@
+var display = document.getElementById("display");
+display.value ="0";
+const calculator = document.getElementById("calc");
+var keyList = calculator.querySelectorAll(".keys");
+console.log(keyList);
+
 function add(a, b){
     var answer = a + b;
     return answer;
@@ -38,8 +44,27 @@ function operate(a, b, op){
             console.log("Operate Error!");
     }
 }
+function clearDisplay(){
+    display.value="0";
+}
+var operatorPressedOnce = false;
+calculator.addEventListener("click", function(e){
+    var numA = 0;
+    var numb = 0;
+    const isOP = e.target.classList.contains('op');
+    const isCLS = e.target.classList.contains('cls');
 
-operate(12,2,'add');
-operate(12,2,'subtract');
-operate(12,2,'multiply');
-operate(12,2,'divide');
+    if(!isCLS){
+    if(display.value === "0"){display.value="";} //Clear 0 on first input
+
+    
+    display.value +=  e.target.innerHTML; //Updates display values
+
+    }else{
+        clearDisplay();
+    }
+
+    console.log(e.target.innerHTML);
+    console.log(isOP);
+
+})
