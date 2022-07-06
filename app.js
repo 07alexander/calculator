@@ -4,6 +4,9 @@ const calculator = document.getElementById("calc");
 var keyList = calculator.querySelectorAll(".keys");
 console.log(keyList);
 
+var numA = 0;
+var numb = 0;
+
 function add(a, b){
     var answer = a + b;
     return answer;
@@ -44,14 +47,17 @@ function operate(a, b, op){
             console.log("Operate Error!");
     }
 }
+var operatorPressedOnce = false;
+var done=false;
+var opFlag;
 function clearDisplay(){
     display.value="";
     display.value="0";
+    
 }
-var operatorPressedOnce = false;
+
 calculator.addEventListener("click", function(e){
-    var numA = 0;
-    var numb = 0;
+    
     const isOP = e.target.classList.contains('op');
     const isCLS = e.target.classList.contains('cls');
     const isKeys = e.target.classList.contains('keys');
@@ -62,8 +68,50 @@ calculator.addEventListener("click", function(e){
         display.value +=  e.target.textContent; //Updates display values
         console.log(display.value);
         }
+        
     }
     if(isCLS){
         clearDisplay();
+        operatorPressedOnce =false;
+    done=false;
+    }
+    if(isOP){
+        if(!operatorPressedOnce){
+            numA = parseInt(display.value);
+            console.log("numa:",numA);
+            opFlag = e.target.textContent;
+            console.log(opFlag);
+            operatorPressedOnce = true;
+            clearDisplay();
+        }
+        if(operatorPressedOnce){
+            if(!done){
+            if(e.target.textContent === "="){
+                numb = parseInt(display.value);
+                switch(opFlag){
+                    case '+':
+                    display.value = add(numA,numb);
+                    done=true;
+                    break;
+                case '−':
+                    display.value = subtract(numA,numb);
+                    done=true;
+                    break;
+                case '×':
+                    display.value = multiply(numA,numb);
+                    done=true;
+                    break;
+                case '÷':
+                    display.value = divide(numA,numb);
+                    done=true;
+                    break;
+                default: 
+                    display.value = "Error Check!"
+                    console.log("Operate Error!");
+                        }
+                
+            }
+        }
+        }
     }
 })
